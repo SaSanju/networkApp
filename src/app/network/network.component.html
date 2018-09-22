@@ -1,0 +1,27 @@
+<div class="d-flex p-3 bg-secondary text-white">
+  <div class="p-2 bg-info">
+    <button type="button" class="btn btn-info pull-left clickable" aria-label="Close" (click)="addTerminal()">
+      <span aria-hidden="true">Add Terminal</span>
+    </button>
+  </div>
+</div>
+<div class="p-3 text-white">
+  <div class="row">
+  <div class="col-md-6" *ngFor="let t of terminal; index as i;">
+    <div class="shell-wrap">
+      <p class="shell-top-bar">mac terminal
+        <button type="button" class="close pull-right" aria-label="Close" (click)="removeTerminal(i)">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </p>
+      <ul class="shell-body" *ngFor="let cm of t">
+        <li>
+          <input type="text" id="myInput" class="col-12" [(ngModel)]="cm.cmdLine" (keyup.ArrowUp)="onKeyUp(t, this)" (keyup.enter)="enterCommand(t, cm, $event)">
+        </li>
+        <li *ngIf="cm.cmdResult != undefined" [innerText]="cm.cmdResult"></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+</div>
